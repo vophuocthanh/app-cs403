@@ -5,10 +5,12 @@
 ### Backend
 
 - ✅ NodeJS (Express)
+- ✅ JavaScript
 - ✅ Database with MySQL
 
 ### Frontend
 
+- ✅ TypeScript
 - ✅ ReactJS
 - ✅ UI Library with shacdn-ui
 - ✅ Deploy on Vercel
