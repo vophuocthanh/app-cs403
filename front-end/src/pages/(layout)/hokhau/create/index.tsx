@@ -9,8 +9,8 @@ interface HoKhauData {
   diachi: string
 }
 
-const CreateEmployee = () => {
-  const [employeeData, setEmployeeData] = useState<HoKhauData>({
+const CreateHoKhau = () => {
+  const [hoKhau, setHoKhau] = useState<HoKhauData>({
     mahokhau: '',
     tenchuho: '',
     diachi: ''
@@ -24,26 +24,21 @@ const CreateEmployee = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setEmployeeData({ ...employeeData, [name]: value })
+    setHoKhau({ ...hoKhau, [name]: value })
   }
 
   const handleCreate = async e => {
     e.preventDefault()
     try {
-      const response = await axios.post(
-        'http://localhost:8089/hokhau',
-        employeeData
-      )
+      const response = await axios.post('http://localhost:8089/hokhau', hoKhau)
       if (response.status === 201) {
-        toast.success('Employee created successfully')
+        toast.success('Hộ khẩu created successfully')
         navigate('/hokhau')
       } else {
-        console.error('Error creating Employee')
-        toast.error('Error creating Employee')
+        toast.error('Error creating hộ khẩu')
       }
     } catch (error) {
-      console.error('Error creating employee:', error)
-      toast.error('Error creating employee')
+      toast.error('Error creating hộ khẩu')
     }
   }
 
@@ -51,7 +46,7 @@ const CreateEmployee = () => {
     <div className="flex flex-col items-center justify-center w-full p-4 mt-10">
       <div className="p-4">
         <h2 className="items-center mx-auto mb-4 text-2xl font-semibold text-center">
-          Create Employee
+          Create Hộ Khẩu
         </h2>
         <form onSubmit={handleCreate}>
           <div className="flex flex-wrap justify-center w-full gap-10">
@@ -64,7 +59,7 @@ const CreateEmployee = () => {
                 id="mahokhau"
                 name="mahokhau"
                 placeholder="Enter employee number"
-                value={employeeData.mahokhau}
+                value={hoKhau.mahokhau}
                 onChange={handleChange}
                 required
                 className="p-2 border border-gray-300 rounded outline-none w-96"
@@ -79,7 +74,7 @@ const CreateEmployee = () => {
                 id="tenchuho"
                 placeholder="Enter tên chủ hộ"
                 name="tenchuho"
-                value={employeeData.tenchuho}
+                value={hoKhau.tenchuho}
                 onChange={handleChange}
                 required
                 className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -94,7 +89,7 @@ const CreateEmployee = () => {
                 placeholder="Enter địa chị"
                 id="diachi"
                 name="diachi"
-                value={employeeData.diachi}
+                value={hoKhau.diachi}
                 onChange={handleChange}
                 required
                 className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -113,4 +108,4 @@ const CreateEmployee = () => {
   )
 }
 
-export default CreateEmployee
+export default CreateHoKhau

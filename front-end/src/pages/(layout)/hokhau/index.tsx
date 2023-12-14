@@ -12,8 +12,8 @@ interface HoKhau {
   diachi: string
 }
 
-const EmployeePage = () => {
-  const [, setEmployee] = useState<HoKhau | null>(null)
+const HoKhauPage = () => {
+  const [, steHoKhau] = useState<HoKhau | null>(null)
   const [data, setData] = useState([])
   useEffect(() => {
     document.title = 'Dashboard | Hộ Khẩu'
@@ -30,21 +30,18 @@ const EmployeePage = () => {
     getDataEmployee()
   }, [])
 
-  const deleteEmployeeMutation = async mahokhau => {
+  const deleteHoKhauMutation = async mahokhau => {
     try {
       const response = await axios.delete(
         `http://localhost:8089/hokhau/${mahokhau}`
       )
       if (response.status === 200 || response.status === 204) {
-        console.log('Employee deleted successfully')
-        toast.success('Employee deleted successfully')
+        toast.success('Hộ khẩu deleted successfully')
       } else {
-        console.error('Error deleting employee')
-        toast.error('Error deleting employee')
+        toast.error('Error deleting hộ khẩu')
       }
     } catch (error) {
-      console.error('Error deleting employee:', error)
-      toast.error('Error deleting employee')
+      toast.error('Error deleting hộ khẩu')
     }
   }
 
@@ -79,7 +76,7 @@ const EmployeePage = () => {
                 <Edit
                   className="cursor-pointer"
                   onClick={() => {
-                    setEmployee(column.row.original)
+                    steHoKhau(column.row.original)
                   }}
                 ></Edit>
               </Link>
@@ -88,7 +85,7 @@ const EmployeePage = () => {
               variant="outline"
               className="w-8 h-8 p-0"
               onClick={() => {
-                deleteEmployeeMutation(column.row.original.mahokhau)
+                deleteHoKhauMutation(column.row.original.mahokhau)
               }}
             >
               <Trash className="text-red-500 cursor-pointer" />
@@ -112,4 +109,4 @@ const EmployeePage = () => {
   )
 }
 
-export default EmployeePage
+export default HoKhauPage

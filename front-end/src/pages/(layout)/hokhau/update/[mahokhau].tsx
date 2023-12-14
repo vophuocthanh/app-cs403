@@ -5,7 +5,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 
 const UpdateEmployee = () => {
   const { mahokhau } = useParams()
-  const [employeeData, setEmployeeData] = useState({
+  const [hoKhau, setHoKhau] = useState({
     mahokhau: '',
     tenchuho: '',
     diachi: ''
@@ -21,11 +21,10 @@ const UpdateEmployee = () => {
         const response = await axios.get(
           `http://localhost:8089/hokhau/${mahokhau}`
         )
-        setEmployeeData(response.data)
-        toast.success('Employee data fetched successfully')
+        setHoKhau(response.data)
+        toast.success('Hộ khẩu data fetched successfully')
       } catch (error) {
-        console.error('Error fetching employee data:', error)
-        toast.error('Error fetching employee data')
+        toast.error('Error fetching hộ khẩu data')
       }
     }
 
@@ -34,7 +33,7 @@ const UpdateEmployee = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setEmployeeData({ ...employeeData, [name]: value })
+    setHoKhau({ ...hoKhau, [name]: value })
   }
 
   const handleUpdate = async e => {
@@ -42,21 +41,18 @@ const UpdateEmployee = () => {
 
     try {
       const response = await axios.put(
-        `http://localhost:8089/hokhau/${employeeData.mahokhau}`,
-        employeeData
+        `http://localhost:8089/hokhau/${hoKhau.mahokhau}`,
+        hoKhau
       )
 
       if (response.status === 200) {
-        console.log('Employee updated successfully')
-        toast.success('Employee updated successfully')
+        toast.success('Hộ khẩu updated successfully')
         navigate('/hokhau')
       } else {
-        console.error('Error updating Employee')
-        toast.error('Error updating Employee')
+        toast.error('Error updating hộ khẩu')
       }
     } catch (error) {
-      console.error('Error updating Employee:', error)
-      toast.error('Error updating Employee')
+      toast.error('Error updating hộ khẩu')
     }
   }
   return (
@@ -76,7 +72,7 @@ const UpdateEmployee = () => {
                 id="mahokhau"
                 name="mahokhau"
                 placeholder="Enter employee number"
-                value={employeeData.mahokhau}
+                value={hoKhau.mahokhau}
                 onChange={handleChange}
                 required
                 className="p-2 border border-gray-300 rounded outline-none w-96"
@@ -91,7 +87,7 @@ const UpdateEmployee = () => {
                 id="tenchuho"
                 placeholder="Enter tên chủ hộ"
                 name="tenchuho"
-                value={employeeData.tenchuho}
+                value={hoKhau.tenchuho}
                 onChange={handleChange}
                 required
                 className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -106,7 +102,7 @@ const UpdateEmployee = () => {
                 placeholder="Enter địa chị"
                 id="diachi"
                 name="diachi"
-                value={employeeData.diachi}
+                value={hoKhau.diachi}
                 onChange={handleChange}
                 required
                 className="w-full p-2 border border-gray-300 rounded outline-none"
