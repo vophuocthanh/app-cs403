@@ -21,7 +21,6 @@ import {
 } from '@/components/ui/Tooltip'
 import { Skeleton } from '@/components/ui/Skeleton'
 interface Props {
-  // user: User
   isToggler?: boolean
   onToggle?: () => void
   loading?: boolean
@@ -116,7 +115,7 @@ function Search() {
       <input
         type="text"
         className="w-full text-lg font-normal bg-transparent outline-none text-primary"
-        placeholder="Search User, Employee..."
+        placeholder="Search hộ khẩu và nhân khẩu..."
       />
     </div>
   )
