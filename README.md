@@ -1,14 +1,18 @@
 # Project Nhóm 3 - CS 403 E
 
+- Code: Võ Phước Thạnh
+
 ## Technology
 
 ### Backend
 
 - ✅ NodeJS (Express)
+- ✅ JavaScript
 - ✅ Database with MySQL
 
 ### Frontend
 
+- ✅ TypeScript
 - ✅ ReactJS
 - ✅ UI Library with shacdn-ui
 - ✅ Deploy on Vercel
