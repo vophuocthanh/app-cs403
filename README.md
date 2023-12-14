@@ -1,5 +1,7 @@
 # Project Nhóm 3 - CS 403 E
 
+- Code: Võ Phước Thạnh
+
 ## Technology
 
 ### Backend
