@@ -1,0 +1,123 @@
+import { IconSearch } from '../components/icons'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger
+} from '@/components/ui/DropdownMenu'
+import { LogOut } from 'lucide-react'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/Avatar'
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger
+} from '@/components/ui/Tooltip'
+import { Skeleton } from '@/components/ui/Skeleton'
+interface Props {
+  // user: User
+  isToggler?: boolean
+  onToggle?: () => void
+  loading?: boolean
+}
+
+export default function Header({ loading }: Props) {
+  const navigate = useNavigate()
+  const [datas, setDatas] = useState([])
+
+  useEffect(() => {
+    const getData = async () => {
+      try {
+        const res = await axios.get('http://localhost:8081/login')
+        setDatas(res.data)
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    getData()
+  }, [])
+
+  const logout = () => {
+    navigate('/login')
+  }
+  return (
+    <div className="flex items-center justify-between px-5 py-4 bg-gradient-to-r from-purple-700 via-red-500 to-yellow-300">
+      <div className="flex items-center gap-[82px] flex-1">
+        <Link to="/" className="flex items-center ml-10">
+          <h1 className="text-3xl font-medium text-center text-transparent rounded bg-gradient-to-r from-pink-400 via-blue-500 to-green-300 bg-clip-text">
+            Nhóm 3 - CS 403
+          </h1>
+        </Link>
+        <Search />
+      </div>
+      <TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger>
+            <DropdownMenu>
+              <DropdownMenuTrigger>
+                <div className="flex space-x-4">
+                  {loading ? (
+                    <>
+                      <Skeleton className="w-12 h-12 rounded-full" />
+                      <div className="space-y-2 w-max">
+                        <Skeleton className="h-4" />
+                        <Skeleton className="h-4" />
+                      </div>
+                    </>
+                  ) : (
+                    <>
+                      <Avatar>
+                        <AvatarImage
+                          src="https://github.com/shadcn.png"
+                          alt="@shadcn"
+                        />
+                        <AvatarFallback></AvatarFallback>
+                      </Avatar>
+                      <div className="w-max">
+                        {datas.map(data => (
+                          <h2 className="text-slate-800" key={data.id}>
+                            {data.Email}
+                          </h2>
+                        ))}
+                      </div>
+                    </>
+                  )}
+                </div>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="w-56">
+                <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                <DropdownMenuGroup>
+                  <DropdownMenuItem onClick={logout} className="cursor-pointer">
+                    <LogOut className="w-4 h-4 mr-2" />
+                    <span>Log out</span>
+                  </DropdownMenuItem>
+                </DropdownMenuGroup>
+              </DropdownMenuContent>
+            </DropdownMenu>
+          </TooltipTrigger>
+          <TooltipContent>Account</TooltipContent>
+        </Tooltip>
+      </TooltipProvider>
+    </div>
+  )
+}
+
+function Search() {
+  return (
+    <div className=" px-[10px] rounded-lg bg-[#f5f5f5] flex items-center gap-2 flex-[0_1_405px] h-[38px]">
+      <IconSearch></IconSearch>
+      <input
+        type="text"
+        className="w-full text-lg font-normal bg-transparent outline-none text-primary"
+        placeholder="Search User, Employee..."
+      />
+    </div>
+  )
+}
