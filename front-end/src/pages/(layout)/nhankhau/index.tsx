@@ -28,14 +28,14 @@ interface NhanKhau {
   noi_cap: string
 }
 
-const PayRatesPage = () => {
-  const [, setPayRates] = useState<NhanKhau | null>(null)
+const NhanKhauPage = () => {
+  const [, setNhanKhau] = useState<NhanKhau | null>(null)
   const [data, setData] = useState([])
   useEffect(() => {
     document.title = 'Dashboard | Nhân Khẩu'
   }, [])
   useEffect(() => {
-    const getDataEmployee = async () => {
+    const getDataNhanKhau = async () => {
       try {
         const res = await axios.get('http://localhost:8089/nhankhau')
         setData(res.data)
@@ -43,7 +43,7 @@ const PayRatesPage = () => {
         console.log(error)
       }
     }
-    getDataEmployee()
+    getDataNhanKhau()
   }, [])
 
   const deleteNhanKhauMutation = async mahokhau => {
@@ -52,15 +52,12 @@ const PayRatesPage = () => {
         `http://localhost:8089/hokhau/${mahokhau}`
       )
       if (response.status === 200 || response.status === 204) {
-        console.log('Employee deleted successfully')
-        toast.success('Employee deleted successfully')
+        toast.success('Nhân khẩu deleted successfully')
       } else {
-        console.error('Error deleting employee')
-        toast.error('Error deleting employee')
+        toast.error('Error deleting nhân khẩu')
       }
     } catch (error) {
-      console.error('Error deleting employee:', error)
-      toast.error('Error deleting employee')
+      toast.error('Error deleting nhân khẩu')
     }
   }
   const columns = useMemo(
@@ -202,7 +199,7 @@ const PayRatesPage = () => {
                 <Edit
                   className="cursor-pointer"
                   onClick={() => {
-                    setPayRates(column.row.original)
+                    setNhanKhau(column.row.original)
                   }}
                 ></Edit>
               </Link>
@@ -235,4 +232,4 @@ const PayRatesPage = () => {
   )
 }
 
-export default PayRatesPage
+export default NhanKhauPage

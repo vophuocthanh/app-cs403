@@ -25,8 +25,8 @@ interface NhanKhauData {
   noi_cap: string
 }
 
-const CreatePayRates = () => {
-  const [payRatesData, setPayRatesData] = useState<NhanKhauData>({
+const CreateNhanKhau = () => {
+  const [nhanKhau, setNhanKhau] = useState<NhanKhauData>({
     ma_nhan_khau: '',
     ho_va_ten: '',
     mahokhau: '',
@@ -56,7 +56,7 @@ const CreatePayRates = () => {
 
   const handleChange = e => {
     const { name, value } = e.target
-    setPayRatesData({ ...payRatesData, [name]: value })
+    setNhanKhau({ ...nhanKhau, [name]: value })
   }
 
   const handleCreate = async e => {
@@ -64,7 +64,7 @@ const CreatePayRates = () => {
     try {
       const response = await axios.post(
         'http://localhost:8089/nhankhau',
-        payRatesData
+        nhanKhau
       )
       if (response.status === 201) {
         toast.success('Nhân khẩu created successfully')
@@ -93,7 +93,7 @@ const CreatePayRates = () => {
               id="ma_nhan_khau"
               name="ma_nhan_khau"
               placeholder="Enter mã nhân khẩu"
-              value={payRatesData.ma_nhan_khau}
+              value={nhanKhau.ma_nhan_khau}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -108,7 +108,7 @@ const CreatePayRates = () => {
               id="ho_va_ten"
               placeholder="Enter họ và tên"
               name="ho_va_ten"
-              value={payRatesData.ho_va_ten}
+              value={nhanKhau.ho_va_ten}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -123,7 +123,7 @@ const CreatePayRates = () => {
               placeholder="Enter mã hộ khẩu"
               id="mahokhau"
               name="mahokhau"
-              value={payRatesData.mahokhau}
+              value={nhanKhau.mahokhau}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -138,7 +138,7 @@ const CreatePayRates = () => {
               placeholder="Enter quan hệ với chủ hộ"
               id="quan_he_voi_chu_ho"
               name="quan_he_voi_chu_ho"
-              value={payRatesData.quan_he_voi_chu_ho}
+              value={nhanKhau.quan_he_voi_chu_ho}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -153,7 +153,7 @@ const CreatePayRates = () => {
               placeholder="Enter Bí Danh"
               id="bi_danh"
               name="bi_danh"
-              value={payRatesData.bi_danh}
+              value={nhanKhau.bi_danh}
               onChange={handleChange}
               required
               className="p-2 border border-gray-300 rounded outline-none w-96"
@@ -168,7 +168,7 @@ const CreatePayRates = () => {
               placeholder="Enter Bí Danh"
               id="ngay_sinh"
               name="ngay_sinh"
-              value={payRatesData.ngay_sinh}
+              value={nhanKhau.ngay_sinh}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -183,7 +183,7 @@ const CreatePayRates = () => {
               placeholder="Enter Nơi Sinh"
               id="noi_sinh"
               name="noi_sinh"
-              value={payRatesData.noi_sinh}
+              value={nhanKhau.noi_sinh}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -198,7 +198,7 @@ const CreatePayRates = () => {
               placeholder="Enter Giới Tính"
               id="gioi_tinh"
               name="gioi_tinh"
-              value={payRatesData.gioi_tinh}
+              value={nhanKhau.gioi_tinh}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -213,7 +213,7 @@ const CreatePayRates = () => {
               placeholder="Enter Số Điện Thoại"
               id="so_dien_thoai"
               name="so_dien_thoai"
-              value={payRatesData.so_dien_thoai}
+              value={nhanKhau.so_dien_thoai}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -228,7 +228,7 @@ const CreatePayRates = () => {
               placeholder="Enter quốc tịch"
               id="quoc_tich"
               name="quoc_tich"
-              value={payRatesData.quoc_tich}
+              value={nhanKhau.quoc_tich}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -243,7 +243,7 @@ const CreatePayRates = () => {
               placeholder="Enter Dân Tộc"
               id="dan_toc"
               name="dan_toc"
-              value={payRatesData.dan_toc}
+              value={nhanKhau.dan_toc}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -258,7 +258,7 @@ const CreatePayRates = () => {
               placeholder="Enter Tôn Giáo"
               id="ton_giao"
               name="ton_giao"
-              value={payRatesData.ton_giao}
+              value={nhanKhau.ton_giao}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -273,7 +273,7 @@ const CreatePayRates = () => {
               placeholder="Enter Công Việc"
               id="cong_viec"
               name="cong_viec"
-              value={payRatesData.cong_viec}
+              value={nhanKhau.cong_viec}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -288,7 +288,7 @@ const CreatePayRates = () => {
               placeholder="Enter Nguyên Quán"
               id="nguyen_quan"
               name="nguyen_quan"
-              value={payRatesData.nguyen_quan}
+              value={nhanKhau.nguyen_quan}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -303,7 +303,7 @@ const CreatePayRates = () => {
               placeholder="Enter Địa Chỉ Thường Trú"
               id="dia_chi_thuong_tru"
               name="dia_chi_thuong_tru"
-              value={payRatesData.dia_chi_thuong_tru}
+              value={nhanKhau.dia_chi_thuong_tru}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -318,7 +318,7 @@ const CreatePayRates = () => {
               placeholder="Enter Địa Chỉ Tạm Trú"
               id="dia_chi_tam_tru"
               name="dia_chi_tam_tru"
-              value={payRatesData.dia_chi_tam_tru}
+              value={nhanKhau.dia_chi_tam_tru}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -333,7 +333,7 @@ const CreatePayRates = () => {
               placeholder="Enter CCCD"
               id="cccd"
               name="cccd"
-              value={payRatesData.cccd}
+              value={nhanKhau.cccd}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -348,7 +348,7 @@ const CreatePayRates = () => {
               placeholder="Enter Ngày Cấp"
               id="ngay_cap"
               name="ngay_cap"
-              value={payRatesData.ngay_cap}
+              value={nhanKhau.ngay_cap}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -363,7 +363,7 @@ const CreatePayRates = () => {
               placeholder="Enter Nơi Cấp"
               id="noi_cap"
               name="noi_cap"
-              value={payRatesData.noi_cap}
+              value={nhanKhau.noi_cap}
               onChange={handleChange}
               required
               className="w-full p-2 border border-gray-300 rounded outline-none"
@@ -381,4 +381,4 @@ const CreatePayRates = () => {
     </div>
   )
 }
-export default CreatePayRates
+export default CreateNhanKhau
