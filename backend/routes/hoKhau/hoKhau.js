@@ -1,8 +1,8 @@
 const express = require('express');
-const routerEmployee = express.Router();
+const routerHoKhau = express.Router();
 const { db } = require('../../modules/server-database');
 
-routerEmployee.get('/', (req, res) => {
+routerHoKhau.get('/', (req, res) => {
   const sql = 'SELECT * FROM ho_khau';
   db.query(sql, (err, data) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -10,7 +10,7 @@ routerEmployee.get('/', (req, res) => {
   });
 });
 
-routerEmployee.get('/:id', (req, res) => {
+routerHoKhau.get('/:id', (req, res) => {
   const mahokhau = req.params.id;
   const sql = 'SELECT * FROM ho_khau WHERE mahokhau = ?';
   db.query(sql, [mahokhau], (err, data) => {
@@ -22,7 +22,7 @@ routerEmployee.get('/:id', (req, res) => {
   });
 });
 
-routerEmployee.post('/', (req, res) => {
+routerHoKhau.post('/', (req, res) => {
   const { mahokhau, tenchuho, diachi } = req.body;
   const sql =
     'INSERT INTO ho_khau (mahokhau, tenchuho, diachi) VALUES (?, ?, ?)';
@@ -39,7 +39,7 @@ routerEmployee.post('/', (req, res) => {
   });
 });
 
-routerEmployee.put('/:id', (req, res) => {
+routerHoKhau.put('/:id', (req, res) => {
   const mahokhau = req.params.id;
   const updatedHoKhau = req.body;
   const sql = 'UPDATE ho_khau SET ? WHERE mahokhau = ?';
@@ -54,7 +54,7 @@ routerEmployee.put('/:id', (req, res) => {
   });
 });
 
-routerEmployee.delete('/:id', (req, res) => {
+routerHoKhau.delete('/:id', (req, res) => {
   const mahokhau = req.params.id;
   const sql = 'DELETE FROM ho_khau WHERE mahokhau = ?';
   db.query(sql, [mahokhau], (err, data) => {
@@ -66,4 +66,4 @@ routerEmployee.delete('/:id', (req, res) => {
   });
 });
 
-module.exports.routerEmployee = routerEmployee;
+module.exports.routerHoKhau = routerHoKhau;

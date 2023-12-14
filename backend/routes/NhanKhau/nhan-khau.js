@@ -1,8 +1,8 @@
 const express = require('express');
-const routerPayRates = express.Router();
+const routerNhanKhau = express.Router();
 const { db } = require('../../modules/server-database');
 
-routerPayRates.get('/', (req, res) => {
+routerNhanKhau.get('/', (req, res) => {
   const sql = 'SELECT * FROM nhan_khau';
   db.query(sql, (err, data) => {
     if (err) return res.status(500).json({ error: err.message });
@@ -10,7 +10,7 @@ routerPayRates.get('/', (req, res) => {
   });
 });
 
-routerPayRates.get('/:id', (req, res) => {
+routerNhanKhau.get('/:id', (req, res) => {
   const idPayRates = req.params.id;
   const sql = 'SELECT * FROM nhan_khau WHERE ma_nhan_khau = ?';
   db.query(sql, [idPayRates], (err, data) => {
@@ -22,7 +22,7 @@ routerPayRates.get('/:id', (req, res) => {
   });
 });
 
-routerPayRates.post('/', (req, res) => {
+routerNhanKhau.post('/', (req, res) => {
   const {
     ma_nhan_khau,
     ho_va_ten,
@@ -75,7 +75,7 @@ routerPayRates.post('/', (req, res) => {
   });
 });
 
-routerPayRates.put('/:id', (req, res) => {
+routerNhanKhau.put('/:id', (req, res) => {
   const ma_nhan_khau = req.params.id;
   const updatedPayRates = req.body;
   const sql = 'UPDATE nhan_khau SET ? WHERE ma_nhan_khau = ?';
@@ -93,7 +93,7 @@ routerPayRates.put('/:id', (req, res) => {
   });
 });
 
-routerPayRates.delete('/:id', (req, res) => {
+routerNhanKhau.delete('/:id', (req, res) => {
   const userId = req.params.id;
   const sql = 'DELETE FROM nhan_khau WHERE ma_nhan_khau = ?';
   db.query(sql, [userId], (err, data) => {
@@ -107,4 +107,4 @@ routerPayRates.delete('/:id', (req, res) => {
   });
 });
 
-module.exports.routerPayRates = routerPayRates;
+module.exports.routerNhanKhau = routerNhanKhau;
